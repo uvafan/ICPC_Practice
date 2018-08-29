@@ -32,6 +32,7 @@ int main(){
                 if(k==j||i==k)continue;
                     if(adjMat[i][k]*adjMat[k][j]>adjMat[i][j]){
                         cout<<"i = "<<i<<" j = "<<j<<" k = "<<k<<" d = "<<adjMat[k][j]*adjMat[i][k]<<endl;
+                        cout<<"kj = "<<adjMat[k][j]<<" ik = "<<adjMat[i][k]<<endl; 
                         adjMat[i][j] = adjMat[i][k]*adjMat[k][j];
                         p[i][j] = p[k][j];
                     }  
