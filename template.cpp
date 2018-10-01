@@ -12,7 +12,6 @@ typedef set<int> si;
 #define INF (int)1e9
 #define EPS 1e-9
 
-int N,i,j;
 int main(){
     return 0;
 }
