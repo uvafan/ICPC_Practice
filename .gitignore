@@ -1,4 +1,5 @@
 *.txt
 *.swp
-a.out
+*.out
+*.in
 1098.cpp
