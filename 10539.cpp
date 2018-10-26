@@ -19,6 +19,8 @@ vector<ll> aprimes;
 
 int bsearch(ll q){
     //d(q);
+    if(q<=aprimes[0])
+        return -1;
     int lo=0;
     int hi=aprimes.size()-1;
     while(lo<hi){
@@ -40,7 +42,7 @@ void sieve(ll upperbound){
     bs.set();
     bs[0] = bs[1] = 0;
     for(ll i=2; i<=_sieve_size; i++)if(bs[i]){
-        for(ll j=i*i; j<=_sieve_size; j+=1) bs[j]=0;
+        for(ll j=i*i; j<=_sieve_size; j+=i) bs[j]=0;
         primes.pb(i);
     }
 }
@@ -64,7 +66,7 @@ int main(){
         cin>>a>>b;
         int c = bsearch(a);
         int d = bsearch(b+1);
-        cout<<d-c+((c==0&&aprimes[0]>=a)?1:0)<<endl;
+        cout<<d-c<<endl;
     }
     return 0;
 }
