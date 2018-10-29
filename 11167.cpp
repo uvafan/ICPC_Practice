@@ -113,6 +113,7 @@ struct Dinic {
         }
         vector<vii> ret(100,empty);
         repr(i,0,100){
+            sort(ans[i].begin(),ans[i].end());
             ii tA = ii(-1,-1);
             int j;
             repr(j,0,ans[i].size()){
