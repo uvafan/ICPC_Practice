@@ -100,11 +100,11 @@ struct Dinic {
                         if(off+e.flow>e.cap){
                             ans[u-1].pb(ii(s+off,s+e.cap));
                             ans[u-1].pb(ii(s,s+e.flow+off-e.cap));
-                            off+=e.flow+1;
+                            off+=e.flow;
                         }
                         else{
                             ans[u-1].pb(ii(s+off,off+s+e.flow));
-                            off+=e.flow+1;
+                            off+=e.flow;
                         }
                         offset[e.v-101] = off%e.cap;
                     }
