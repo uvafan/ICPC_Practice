@@ -9,7 +9,7 @@ typedef long long ll;
 #define repr(i,l,r) for(int i=(l), _##i=(r); i<_##i; ++i)
 #define d(arg) do {cerr << #arg << ": "; cerr << arg; cerr << endl;} while(0)
 #define pb push_back
-#define INF (int)1e9
+#define INF (ll)1e9
 #define EPS 1e-9
 
 int main(){
@@ -35,6 +35,8 @@ int main(){
                 size--;
            }
         }
+        if(best==INF)
+            best=0;
         cout<<best<<endl;
     }
     return 0;
