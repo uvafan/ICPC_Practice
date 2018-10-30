@@ -4,6 +4,7 @@ using namespace std;
 typedef pair<int,int> ii;
 typedef vector<ii> vii;
 typedef vector<int> vi;
+typedef long long ll;
 
 #define repr(i,l,r) for(int i=(l), _##i=(r); i<_##i; ++i)
 #define d(arg) do {cerr << #arg << ": "; cerr << arg; cerr << endl;} while(0)
@@ -21,9 +22,9 @@ int main(){
             nums.pb(j);
         }
         deque<int> dq;
-        int sum=0;
-        int best=INF;
-        int size=0;
+        ll sum=0;
+        ll best=INF;
+        ll size=0;
         repr(i,0,N){
             dq.pb(nums[i]);
             sum+=nums[i];
