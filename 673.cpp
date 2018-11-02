@@ -29,7 +29,7 @@ int main(){
                 }
                 s.pop_back();
             }
-            else{
+            else if(c==')'){
                 if(!s.size()||s[s.size()-1]!='('){
                     out="No";
                     break;
@@ -37,6 +37,8 @@ int main(){
                 s.pop_back();
             }
         }
+        if(s.size())
+            out="No";
         cout<<out<<endl;
     }
     return 0;
