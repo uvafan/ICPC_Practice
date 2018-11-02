@@ -14,10 +14,11 @@ typedef vector<int> vi;
 int main(){
     int N;
     cin>>N;
+    string line;
+    getline(cin,line);
     while(N--){
         vector<char> s;
-        string line;
-        cin>>line;
+        getline(cin,line);
         string out = "Yes";
         for(char c: line){
             if(c=='('||c=='[')
