@@ -24,7 +24,7 @@ pair<vi,int> inv(vi nums){
     int lp=0;
     int rp=0;
     while(lp<larr.size()&&rp<rarr.size()){
-        if(larr[lp]<rarr[rp]){
+        if(larr[lp]<=rarr[rp]){
             ret.pb(larr[lp]);
             lp++;
         }
