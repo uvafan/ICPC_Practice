@@ -102,7 +102,9 @@ int main(){
             }
         }
         pll ans = mcmf.mf(0,M+N+1);
-        cout<<fixed<<setprecision(2)<<ans.second/ans.first<<endl;
+        double a = ans.second/ans.first;
+        a = floor(a*100.0+0.5+EPS)/100.0;
+        cout<<fixed<<setprecision(2)<<a<<endl;
     }
     return 0;
 }
