@@ -12,5 +12,6 @@ typedef vector<int> vi;
 #define EPS 1e-9
 
 int main(){
+    ios::sync_with_stdio(false),cin.tie(0);
     return 0;
 }

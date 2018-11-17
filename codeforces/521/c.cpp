@@ -12,8 +12,8 @@ typedef vector<int> vi;
 #define EPS 1e-9
 
 int main(){
-    int sum=0;
-    int N,i,j,k;
+    long long sum=0;
+    int N,i,j;
     cin>>N;
     vi nums;
     int max=-INF; int nextMax=-INF;
@@ -31,7 +31,7 @@ int main(){
     vi ans;
     repr(i,0,N){
         j=nums[i];
-        k=sum-j;
+        long long k=sum-j;
         int sumTo=(j==max?nextMax:max);
         if(k-sumTo==sumTo)
             ans.pb(i+1);

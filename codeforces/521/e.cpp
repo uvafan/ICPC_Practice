@@ -45,42 +45,39 @@ int solve(int i, int ma){
     return dp[i][j] = ans;
 }*/
 
-vector<vi> dp;
 
-int calc(int k,int i){
-    if(k>freqs[M-1]||i>=M){
-        return 0;
+int calc(int k){
+    int i=0;
+    int ans=0;
+    while(true){
+        i = lower_bound(freqs.begin()+i,freqs.end(),k)-freqs.begin();
+        if(i==freqs.size())
+            break;
+        ans += k;
+        k*=2;
+        i+=1;
     }
-    if(dp[k][i]!=-1)
-        return dp[k][i];
-    int f = bSearch(k,i);
-    int ans = k+calc(k*2,f+1);
-    return dp[k][i] = ans;
+    return ans;
 }
 
 int main(){
+    ios::sync_with_stdio(false),cin.tie(0);
     int sum=0;
     int i,j,k;
     cin>>N;
-    vi nums;
-    unordered_map<int,int> freq;
+    map<int,int> freq;
     repr(i,0,N){
         cin>>j;
-        nums.pb(j);
-        if(freq.find(j)==freq.end())
-            freq[j]=0;
         freq[j]++;
     }
-    set<int> f;
     for(auto el: freq){
         freqs.pb(el.second);
     } 
     sort(freqs.begin(),freqs.end());
     M=freqs.size();
-    dp.assign(freqs[M-1]+1,vi(M,-1));
     int ans=-INF;
     repr(k,1,freqs[M-1]+1){
-        ans = max(ans,calc(k,0));
+        ans = max(ans,calc(k));
     }
     cout<<ans<<endl;
     return 0;
