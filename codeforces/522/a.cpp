@@ -31,5 +31,22 @@ unordered_map<int,int,custom_hash> m;
 
 int main(){
     ios::sync_with_stdio(false),cin.tie(0);
+    int N,K;
+    cin>>N>>K;
+    int i,j;
+    map<int,int> freq;
+    repr(i,0,N){
+        cin>>j;freq[j]++;
+    }
+    int dishes=1;
+    for(auto e: freq){
+        dishes = max(dishes,(e.second+K-1)/K);
+    }
+    int exp = dishes*K;
+    int ret=0;
+    for(auto e: freq){
+        ret+=exp-e.second;
+    }
+    cout<<ret<<endl;
     return 0;
 }

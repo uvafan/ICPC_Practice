@@ -29,7 +29,34 @@ struct custom_hash {
 
 unordered_map<int,int,custom_hash> m;
 
+void p(string s, int a,int r, int c){
+    cout<<r<<' '<<c<<endl;
+    int i,j;
+    repr(i,0,r){
+        int rowsLeft = r-i;
+        int astsInRow = a/rowsLeft;
+        string o = "";
+        repr(j,0,astsInRow)
+            o+='*';
+        o+=s.substr(0,c-astsInRow);
+        cout<<o<<endl;
+        a-=astsInRow;
+        s = s.substr(c-astsInRow);
+    }
+}
+
 int main(){
     ios::sync_with_stdio(false),cin.tie(0);
-    return 0;
+    string s;
+    cin>>s;
+    int L=s.size();
+    int i,j,k;
+    repr(i,1,6){
+        repr(j,0,i*20-L+1){
+            if((L+j)%i==0&&(L+j)/i<21){
+                p(s,j,i,(L+j)/i);
+                return 0;
+            }
+        }
+    }
 }

@@ -29,7 +29,45 @@ struct custom_hash {
 
 unordered_map<int,int,custom_hash> m;
 
+vi weights;
+
 int main(){
     ios::sync_with_stdio(false),cin.tie(0);
+    int N,i,j,k;
+    cin>>N;
+    map<int,int> freq;
+    set<int> wset;
+    repr(i,0,N){
+        cin>>j;weights.pb(j);freq[j]++;
+    }
+    int dp[N+1][N+1][N*100+1];
+    repr(i,0,N+1)repr(k,0,N+1)repr(j,0,100*N+1){dp[i][k][j]=0;}
+    dp[0][0][0]=1;
+    repr(i,0,N){
+        repr(k,0,N){
+            repr(j,0,100*N+1){
+                dp[i+1][k][j] = ((j>=weights[i]&&k>0)?dp[i][k-1][j-weights[i]]:0) | dp[i][k][j];
+            }
+        }
+    }
+    int best=1;
+    int cum=1;
+    for(auto e: freq){
+        for(int n=e.second;n>best;n--){
+            bool ok = true;
+            for(auto e2: freq){
+                if(e.first==e2.first)
+                    continue;
+                if(dp[N][n-1][e.first*n-e2.first]){
+                    ok=false;
+                    break;
+                }
+            }
+            if(ok){
+                best=n;break;
+            }
+        }
+    }
+    cout<<best<<endl;
     return 0;
 }
