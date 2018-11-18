@@ -40,13 +40,13 @@ int main(){
     repr(i,0,N){
         cin>>j;weights.pb(j);freq[j]++;
     }
-    int dp[N+1][N+1][N*100+1];
-    repr(i,0,N+1)repr(k,0,N+1)repr(j,0,100*N+1){dp[i][k][j]=0;}
-    dp[0][0][0]=1;
+    int dp[N+1][N*100+1];
+    repr(i,0,N+1)repr(j,0,100*N+1){dp[i][j]=0;}
+    dp[0][0]=1;
     repr(i,0,N){
         repr(k,0,N){
             repr(j,0,100*N+1){
-                dp[i+1][k][j] = ((j>=weights[i]&&k>0)?dp[i][k-1][j-weights[i]]:0) | dp[i][k][j];
+                dp[k][j] = ((j>=weights[i]&&k>0)?dp[k-1][j-weights[i]]:0) | dp[k][j];
             }
         }
     }
@@ -58,7 +58,7 @@ int main(){
             for(auto e2: freq){
                 if(e.first==e2.first)
                     continue;
-                if(dp[N][n-1][e.first*n-e2.first]){
+                if(dp[n-1][e.first*n-e2.first]){
                     ok=false;
                     break;
                 }
