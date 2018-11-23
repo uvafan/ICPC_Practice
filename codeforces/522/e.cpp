@@ -37,37 +37,47 @@ int main(){
     cin>>N;
     map<int,int> freq;
     set<int> wset;
+    int sum=0;
     repr(i,0,N){
-        cin>>j;weights.pb(j);freq[j]++;
+        cin>>j;weights.pb(j);freq[j]++;sum+=j;
     }
     int dp[N+1][N*100+1];
     repr(i,0,N+1)repr(j,0,100*N+1){dp[i][j]=0;}
     dp[0][0]=1;
     repr(i,0,N){
-        repr(k,0,N){
-            repr(j,0,100*N+1){
-                dp[k][j] = ((j>=weights[i]&&k>0)?dp[k-1][j-weights[i]]:0) | dp[k][j];
+        d(i);
+        for(k=i+1;k>0;k--){
+            repr(j,0,sum+1){
+                dp[k][j] = min(((j>=weights[i]&&k>0)?dp[k-1][j-weights[i]]:0) + dp[k][j],2);
+                d(k);d(j);d(dp[k][j]);
             }
         }
     }
     int best=1;
     int cum=1;
+    int count=0;
     for(auto e: freq){
+        count++;
         for(int n=e.second;n>best;n--){
-            bool ok = true;
+            bool ok = dp[n][e.first*n]<2;
+            /*
             for(auto e2: freq){
                 if(e.first==e2.first)
                     continue;
                 if(dp[n-1][e.first*n-e2.first]){
+                    d(n);d(e.first);d(e2.first);
                     ok=false;
                     break;
                 }
-            }
+            }*/
             if(ok){
                 best=n;break;
             }
         }
     }
-    cout<<best<<endl;
+    if(count==1||count==2)
+        cout<<N<<endl;
+    else
+        cout<<best<<endl;
     return 0;
 }
