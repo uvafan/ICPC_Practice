@@ -33,22 +33,35 @@ int N,C;
 vi nums,cs;
 map<int,int> freq;
 
-int solve(int i, int j){
-    while(i<j){
-        
-    }
-}
-
 int main(){
     ios::sync_with_stdio(false),cin.tie(0);
     int ret=0;
     int i,j,k;
     cin>>N>>C;
+    vi sumcs;
+    int cs=0;
     repr(i,0,N){
         cin>>j;
         nums.pb(j);
-        if(j==c)cs.pb(j);
+        if(j==C)cs++;
+        sumcs.pb(cs);
     }
-    cout<<solve(0,N-1)<<endl;
+    int maxDiff = 0;
+    map<int,int> curSum;
+    map<int,int> lastO;
+    repr(i,0,N){
+        if(nums[i]==C)continue;
+        if(lastO.find(nums[i])==lastO.end()){
+            curSum[nums[i]]=1;
+            maxDiff = max(maxDiff,1);
+        }
+        else{
+            int cssinceLast = sumcs[i]-sumcs[lastO[nums[i]]];
+            curSum[nums[i]] = max(curSum[nums[i]]+1-cssinceLast,1);
+            maxDiff = max(maxDiff,curSum[nums[i]]);
+        }
+        lastO[nums[i]]=i;
+    }
+    cout<<cs+maxDiff<<endl;
     return 0;
 }
