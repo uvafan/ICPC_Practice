@@ -31,5 +31,31 @@ unordered_map<int,int,custom_hash> m;
 
 int main(){
     ios::sync_with_stdio(false),cin.tie(0);
+    int N;
+    ll glass,a;
+    vector<ll> kegs;
+    cin>>N>>glass;
+    int i,j,k;
+    repr(i,0,N){
+        cin>>a;kegs.pb(a);
+    }
+    sort(kegs.begin(),kegs.end());
+    ll cum = 0;
+    repr(i,1,N){
+        cum+=(kegs[i]-kegs[0]);
+    }
+    if(cum>=glass){
+        cout<<kegs[0]<<endl;
+    }
+    else{
+        ll numMore = glass-cum;
+        ll pours = (numMore+N-1)/N;
+        if(pours>kegs[0]){
+            cout<<-1<<endl;
+        }
+        else{
+            cout<<kegs[0]-pours<<endl;
+        }
+    }
     return 0;
 }

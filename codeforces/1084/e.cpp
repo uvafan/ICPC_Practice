@@ -28,30 +28,52 @@ struct custom_hash {
 };
 
 unordered_map<int,int,custom_hash> m;
-int MOD = (int)1e9+7;
-string s;
-vi sizes;
+string l,g;
+int N,K;
 
 int main(){
     ios::sync_with_stdio(false),cin.tie(0);
-    cin>>s;
-    int size=0;
-    for(char c: s){
-        if(c=='a')
-            size++;
-        if(c=='b'){
-            if(size)
-                sizes.pb(size);
-            size=0;
+    cin>>N>>K>>l>>g;
+    ll provL=0;
+    ll provG=0;
+    ll provB=0;
+    ll provN=0;
+    ll ans=0;
+    int i,j;
+    if(l[0]==g[0]){
+        provN=1;
+        ans=1;
+    }
+    else{
+        provL=1;
+        provG=1;
+        ans = min(K,2);
+    }
+    repr(i,1,N){
+        ll amount = provG+provL+provB+provN;
+        if(amount>=K){
+            ans+=K;
+            continue;
         }
+        char le = l[i]; char gr = g[i];
+        provB*=2;
+        if(le=='a'&&gr=='a'){
+            provB+=provG;
+            //provG+=provN;
+        }
+        if(le=='a'&&gr=='b'){
+            provB+=(provG+provL);
+            provG+=provN;
+            provL+=provN;
+            provN=0;
+        }
+        if(le=='b'&&gr=='b'){
+            provB+=provL;
+            //provL+=provN;
+        }
+        amount = provG+provL+provB+provN;
+        ans += (amount>K)?K:amount;
     }
-    if(size)
-        sizes.pb(size);
-    ll cum = 0;
-    for(int size: sizes){
-        cum += (size*(cum+1))%MOD;
-        cum %= MOD;
-    }
-    cout<<cum<<endl;
+    cout<<ans<<endl;
     return 0;
 }

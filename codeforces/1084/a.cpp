@@ -31,5 +31,23 @@ unordered_map<int,int,custom_hash> m;
 
 int main(){
     ios::sync_with_stdio(false),cin.tie(0);
+    int ret=INF;
+    vi nums;
+    int i,j,k;
+    cin>>k;
+    repr(i,0,k){
+        cin>>j;
+        nums.pb(j);
+    }
+    int x,a,b;
+    repr(x,0,k){
+        int cum=0;
+        repr(a,0,k){
+            int e = abs(x-a)*2+a*2+x*2;
+            cum+=e*nums[a];
+        }
+        ret = min(cum,ret);
+    }
+    cout<<ret<<endl;
     return 0;
 }
